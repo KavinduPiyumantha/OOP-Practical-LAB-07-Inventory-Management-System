@@ -266,7 +266,7 @@ public class Inventory extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

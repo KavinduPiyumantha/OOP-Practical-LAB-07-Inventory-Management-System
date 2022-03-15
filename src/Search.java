@@ -3,7 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 /**
  *
@@ -16,6 +29,26 @@ public class Search extends javax.swing.JFrame {
      */
     public Search() {
         initComponents();
+        Connect();
+    }
+    
+    
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    
+    
+    public void Connect(){
+        
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/InventorySystem","root","Silvatkp99");  
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException ex) {
+            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,9 +63,9 @@ public class Search extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnSearchItem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        searchTable = new javax.swing.JTable();
         txtItemSearch = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        selectType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,123 +81,31 @@ public class Search extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        searchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Index No.", "Item", "Qty.", "Unit Price"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setEnabled(false);
-        jScrollPane1.setViewportView(jTable1);
+        searchTable.setEnabled(false);
+        jScrollPane1.setViewportView(searchTable);
 
         txtItemSearch.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 204)));
         txtItemSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +114,7 @@ public class Search extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("ITEM");
+        selectType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Quantity", "Price" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,25 +122,25 @@ public class Search extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtItemSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(selectType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(txtItemSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtItemSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearchItem)
-                    .addComponent(jLabel2))
-                .addGap(28, 28, 28)
+                    .addComponent(selectType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -221,53 +162,101 @@ public class Search extends javax.swing.JFrame {
 
     private void btnSearchItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchItemActionPerformed
         //Search Button
-        try{
+        
+            String typeGets = selectType.getSelectedItem().toString();
+            
+
+            int text = 0;
+            
+            String type;
+
+            if(typeGets == "ID"){
+                type = "Item_NO";
+                String textGets = txtItemSearch.getText();
+                text= Integer.parseInt(textGets);
+            }
+            else if(typeGets == "Name"){
+                type = "Name";
+                //text= textGets;
+            }
+            else if(typeGets == "Quantity"){
+                type = "Quantity";
+            }
+            else{
+                type = "Price";
+            }
+
+            
+            
+            int c;
+        
+       
             if( txtItemSearch.getText().equals(""))
             JOptionPane.showMessageDialog(null, "Enter item!", "Oops Wait...!", JOptionPane.ERROR_MESSAGE);
             else{
-                for( int r=0; r<100; r++)   //initializing row
-                for( int c=0; c<4; c++) //initializing column
-                jTable1.setValueAt("", r, c);
-
-                BufferedReader rdfile= new BufferedReader( new FileReader("items.txt"));
-                String[] line= new String[100];
-                String search="", output="", target="";
-
-                boolean same= false, found=false;
-
-                int x=0, row=0;
-                while( (line[x]= rdfile.readLine()) != null)//reading items.txt; asigning to array[] line
-                x++;
-
-                rdfile.close();
-
-                search= txtItemSearch.getText();
-
-                for( int k=0; line[k] != null; k++){
-                    same= false;
-                    target="";
-                    for( int j=0; j < search.length(); j++)
-                    target+= line[k].charAt(j);
-
-                    if( search.equals(target))
-                    same=true;
-
-                    if( same){
-                        String[] temp= line[k].split("\t");
-                        jTable1.setValueAt((1000+k+1), row, 0);
-                        for( int i=1; i<4; i++)
-                        jTable1.setValueAt(temp[i-1], row,i);
-                        row++;
-                        found=true;
+                
+                try {
+                    pst =con.prepareStatement("Select * from ItemsTable where ? = ?");
+                    pst.setString(1, type);
+                    pst.setInt(2, text);
+                    
+                    rs= pst.executeQuery();
+                    
+                    System.out.println(rs);
+                    ResultSetMetaData rsd;
+                    rsd = rs.getMetaData();
+                    c =rsd.getColumnCount();
+                    
+                    System.out.println(rsd);
+                    System.out.println(c);
+                    
+                    DefaultTableModel d =(DefaultTableModel) searchTable.getModel();
+                    d.setRowCount(0);
+                    
+                    
+                    while(rs.next()){
+                        Vector v1 = new Vector();
+                        //System.out.println(v);//
+                        for(int i=1;i<=c;i++){
+                            v1.add(rs.getInt("Item_No"));
+                                System.out.println(rs.getInt("Item_No"));
+                            v1.add(rs.getString("Name"));
+                                System.out.println(rs.getString("Name"));
+                            v1.add(rs.getInt("Quantity"));
+                                System.out.println(rs.getInt("Quantity"));
+                            v1.add(rs.getDouble("Price"));
+                                System.out.println(rs.getDouble("Price"));
+                        }
+                       
+                        Enumeration enumeration = v1.elements();
+        //6
+                        while(enumeration.hasMoreElements()){
+                            System.out.println(enumeration.nextElement());
+                        }
+                       
+                        
+                        
+                        
+                        
+                        System.out.print(v1);//
+                        d.addRow(v1);
                     }
+                    
+
+                        
+                    txtItemSearch.setText("");
+                        
+                    
+                    
+                    
+                    //JOptionPane.showMessageDialog(null, "Item(s) not found!", "Ooops!", JOptionPane.ERROR_MESSAGE);
+                    
+                   
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                if( !found)
-                JOptionPane.showMessageDialog(null, "Item(s) not found!", "Ooops!", JOptionPane.ERROR_MESSAGE);
-
-                txtItemSearch.setText("");
             }
-        }catch(IOException e){}
+        
     }//GEN-LAST:event_btnSearchItemActionPerformed
 
     private void txtItemSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemSearchActionPerformed
@@ -312,10 +301,10 @@ public class Search extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearchItem;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable searchTable;
+    private javax.swing.JComboBox<String> selectType;
     private javax.swing.JTextField txtItemSearch;
     // End of variables declaration//GEN-END:variables
 }
