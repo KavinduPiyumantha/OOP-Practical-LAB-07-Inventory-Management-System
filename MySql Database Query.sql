@@ -12,10 +12,11 @@ primary key(Item_No)
 
 drop table ItemsTable;
 
+Insert into ItemsTable(Name,Quantity,Price) 
+Value("fref",10,20);
 
 
-
-
+ALTER TABLE ItemsTable AUTO_INCREMENT = 1;
 
 
 

@@ -604,6 +604,9 @@ public class Inventory extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Succesfully Deleted!", "Ok!  :-)", JOptionPane.INFORMATION_MESSAGE);
                     }
                     
+                    pst = con.prepareStatement("ALTER TABLE ItemsTable AUTO_INCREMENT = ?");
+                    pst.setInt(1, id);
+                    pst.executeUpdate();
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
