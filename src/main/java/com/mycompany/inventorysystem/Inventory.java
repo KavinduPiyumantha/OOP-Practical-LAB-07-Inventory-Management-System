@@ -1,6 +1,13 @@
 package com.mycompany.inventorysystem;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class Inventory extends javax.swing.JFrame {
@@ -9,6 +16,29 @@ public class Inventory extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    
+    
+    
+    
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    
+        public void Connect(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Library","root","Silvatkp99");               
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,11 +61,11 @@ public class Inventory extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtAddItemName = new javax.swing.JTextField();
+        txtAddItemQuantity = new javax.swing.JTextField();
+        txtAddItemPrice = new javax.swing.JTextField();
         btnDeleteItem = new javax.swing.JButton();
-        jTextField14 = new javax.swing.JTextField();
+        txtDeleteItem = new javax.swing.JTextField();
         btnAddItem = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -211,24 +241,24 @@ public class Inventory extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtAddItemName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
+        txtAddItemName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtAddItemNameActionPerformed(evt);
             }
         });
 
-        jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtAddItemQuantity.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
+        txtAddItemQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtAddItemQuantityActionPerformed(evt);
             }
         });
 
-        jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtAddItemPrice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
+        txtAddItemPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtAddItemPriceActionPerformed(evt);
             }
         });
 
@@ -240,10 +270,10 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
-        jTextField14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+        txtDeleteItem.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
+        txtDeleteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
+                txtDeleteItemActionPerformed(evt);
             }
         });
 
@@ -279,7 +309,7 @@ public class Inventory extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDeleteItem, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -297,9 +327,9 @@ public class Inventory extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addComponent(btnRemoveItem)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5))))
+                            .addComponent(txtAddItemName)
+                            .addComponent(txtAddItemQuantity)
+                            .addComponent(txtAddItemPrice))))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -311,23 +341,23 @@ public class Inventory extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAddItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAddItemQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddItem)
                     .addComponent(btnRemoveItem))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDeleteItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteItem)
@@ -479,30 +509,30 @@ public class Inventory extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtAddItemNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddItemNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtAddItemNameActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtAddItemQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddItemQuantityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtAddItemQuantityActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtAddItemPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddItemPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtAddItemPriceActionPerformed
 
     private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteItemActionPerformed
         //Delete Button
 
         try {
-            if (jTextField14.getText().equals(""))
+            if (txtDeleteItem.getText().equals(""))
             JOptionPane.showMessageDialog(null, "Enter item!", "Oops Wait...!", JOptionPane.ERROR_MESSAGE);
             else {
                 BufferedReader rdfile = new BufferedReader(new FileReader("items.txt"));
 
                 String[] itemline = new String[100];
                 String[] temp;
-                String delete = jTextField14.getText();
+                String delete = txtDeleteItem.getText();
                 boolean found = false;
 
                 int x = 0;
@@ -530,15 +560,15 @@ public class Inventory extends javax.swing.JFrame {
                 else
                 JOptionPane.showMessageDialog(null, "Succesfully Deleted!", "Ok!  :-)", JOptionPane.INFORMATION_MESSAGE);
 
-                jTextField14.setText("");
+                txtDeleteItem.setText("");
 
             }
         } catch (IOException e) {}
     }//GEN-LAST:event_btnDeleteItemActionPerformed
 
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+    private void txtDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeleteItemActionPerformed
        
-    }//GEN-LAST:event_jTextField14ActionPerformed
+    }//GEN-LAST:event_txtDeleteItemActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
@@ -636,7 +666,7 @@ public class Inventory extends javax.swing.JFrame {
         // Add Button
 
         try {
-            if (jTextField3.getText().equals("")) {
+            if (txtAddItemName.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Enter item!", "Oops Wait...!", JOptionPane.ERROR_MESSAGE);
             } else {
                 BufferedReader rdfile = new BufferedReader(new FileReader("items.txt"));
@@ -654,7 +684,7 @@ public class Inventory extends javax.swing.JFrame {
                 rdfile.close();
 
                 if (!(x >= 100)) {
-                    prod = jTextField3.getText();
+                    prod = txtAddItemName.getText();
 
                     for (int j = 0; itemline[j] != null; j++) {      //check whether item is in the list already
                         String[] temp = itemline[j].split("\t");
@@ -667,8 +697,8 @@ public class Inventory extends javax.swing.JFrame {
                     if (found) {
                         JOptionPane.showMessageDialog(null, "Item already exist!\nSuggestion: Update Item", "", JOptionPane.WARNING_MESSAGE);
                     } else {
-                        qty = Integer.parseInt(jTextField4.getText());
-                        price = Double.parseDouble(jTextField5.getText());
+                        qty = Integer.parseInt(txtAddItemQuantity.getText());
+                        price = Double.parseDouble(txtAddItemPrice.getText());
 
                         itemline[x] = prod + "\t" + qty + "\t" + price;
 
@@ -687,17 +717,17 @@ public class Inventory extends javax.swing.JFrame {
                 }
             }
 
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
+            txtAddItemName.setText("");
+            txtAddItemQuantity.setText("");
+            txtAddItemPrice.setText("");
 
         } catch (IOException e) {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Some input may be invalid!", "Warning!", JOptionPane.WARNING_MESSAGE);
 
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
+            txtAddItemName.setText("");
+            txtAddItemQuantity.setText("");
+            txtAddItemPrice.setText("");
         }
     }//GEN-LAST:event_btnAddItemActionPerformed
 
@@ -736,9 +766,9 @@ public class Inventory extends javax.swing.JFrame {
     private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveItemActionPerformed
          //Clear Button(Add/Delete)
 
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");// TODO add your handling code here:
+        txtAddItemName.setText("");
+        txtAddItemQuantity.setText("");
+        txtAddItemPrice.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_btnRemoveItemActionPerformed
 
     public static void main(String args[]) {
@@ -795,10 +825,6 @@ public class Inventory extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
@@ -814,5 +840,9 @@ public class Inventory extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar3;
     private java.awt.PopupMenu popupMenu1;
     private java.awt.PopupMenu popupMenu2;
+    private javax.swing.JTextField txtAddItemName;
+    private javax.swing.JTextField txtAddItemPrice;
+    private javax.swing.JTextField txtAddItemQuantity;
+    private javax.swing.JTextField txtDeleteItem;
     // End of variables declaration//GEN-END:variables
 }
