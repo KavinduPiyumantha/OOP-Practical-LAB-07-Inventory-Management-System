@@ -111,15 +111,15 @@ public class Inventory extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnRemoveItem = new javax.swing.JButton();
         tabUpdate = new javax.swing.JPanel();
-        txtUpdateItemID = new javax.swing.JTextField();
         txtUpdateItemName = new javax.swing.JTextField();
         txtUpdateItemQunt = new javax.swing.JTextField();
         txtUpdateItemPrice = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        btnSearch = new javax.swing.JButton();
+        btnUpdateItem = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        txtUpdateItemID = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
@@ -419,12 +419,6 @@ public class Inventory extends javax.swing.JFrame {
         tabUpdate.setBackground(new java.awt.Color(204, 204, 204));
         tabUpdate.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 51, 153)));
 
-        txtUpdateItemID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUpdateItemIDActionPerformed(evt);
-            }
-        });
-
         txtUpdateItemName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUpdateItemNameActionPerformed(evt);
@@ -445,10 +439,10 @@ public class Inventory extends javax.swing.JFrame {
 
         jLabel5.setText("Item");
 
-        btnSearch.setText("Save Changes");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateItem.setText("Save Changes");
+        btnUpdateItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+                btnUpdateItemActionPerformed(evt);
             }
         });
 
@@ -471,24 +465,28 @@ public class Inventory extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUpdateItemID, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                    .addComponent(txtUpdateItemPrice)
-                    .addComponent(txtUpdateItemName)
-                    .addComponent(txtUpdateItemQunt, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(12, 12, 12))
+                    .addGroup(tabUpdateLayout.createSequentialGroup()
+                        .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUpdateItemPrice)
+                            .addComponent(txtUpdateItemName)
+                            .addComponent(txtUpdateItemQunt, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(12, 12, 12))
+                    .addGroup(tabUpdateLayout.createSequentialGroup()
+                        .addComponent(txtUpdateItemID)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabUpdateLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addContainerGap(122, Short.MAX_VALUE)
+                .addComponent(btnUpdateItem)
+                .addGap(118, 118, 118))
         );
         tabUpdateLayout.setVerticalGroup(
             tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabUpdateLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(32, 32, 32)
                 .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUpdateItemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(41, 41, 41)
+                    .addComponent(jLabel5)
+                    .addComponent(txtUpdateItemID))
+                .addGap(47, 47, 47)
                 .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUpdateItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -500,9 +498,9 @@ public class Inventory extends javax.swing.JFrame {
                 .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUpdateItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(44, 44, 44)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         Tabs.addTab("Update", tabUpdate);
@@ -639,10 +637,6 @@ public class Inventory extends javax.swing.JFrame {
        
     }//GEN-LAST:event_txtDeleteItemActionPerformed
 
-    private void txtUpdateItemIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateItemIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUpdateItemIDActionPerformed
-
     private void txtUpdateItemNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateItemNameActionPerformed
         //jButton8ActionPerformed(evt);
     }//GEN-LAST:event_txtUpdateItemNameActionPerformed
@@ -655,7 +649,7 @@ public class Inventory extends javax.swing.JFrame {
        // jButton8ActionPerformed(evt);
     }//GEN-LAST:event_txtUpdateItemPriceActionPerformed
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    private void btnUpdateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateItemActionPerformed
         // Save Changes(Update)
 
         try{
@@ -729,7 +723,7 @@ public class Inventory extends javax.swing.JFrame {
             txtUpdateItemQunt.setText("");
             txtUpdateItemPrice.setText("");
         }
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }//GEN-LAST:event_btnUpdateItemActionPerformed
 
     private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
         // Add Button
@@ -837,9 +831,25 @@ public class Inventory extends javax.swing.JFrame {
         DefaultTableModel d1 =(DefaultTableModel )ItemTable.getModel();
         int selectIndex =ItemTable.getSelectedRow();
         
+
         int id =Integer.parseInt(d1.getValueAt(selectIndex, 0).toString());
         
+        
+        // get date from table to update section fields
+        
+        txtUpdateItemID.setText(d1.getValueAt(selectIndex, 0).toString());
+        txtUpdateItemName.setText(d1.getValueAt(selectIndex, 1).toString());
+        txtUpdateItemQunt.setText(d1.getValueAt(selectIndex, 2).toString());
+        txtUpdateItemPrice.setText(d1.getValueAt(selectIndex, 3).toString());
+        
+        //get id to delete section field
+        
         txtDeleteItem.setText(Integer.toString(id));
+        
+        
+        
+        
+        
     }//GEN-LAST:event_ItemTableMouseClicked
 
     public static void main(String args[]) {
@@ -881,7 +891,7 @@ public class Inventory extends javax.swing.JFrame {
     private javax.swing.JButton btnAddItem;
     private javax.swing.JButton btnDeleteItem;
     private javax.swing.JButton btnRemoveItem;
-    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdateItem;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -912,7 +922,7 @@ public class Inventory extends javax.swing.JFrame {
     private javax.swing.JTextField txtAddItemPrice;
     private javax.swing.JTextField txtAddItemQuantity;
     private javax.swing.JTextField txtDeleteItem;
-    private javax.swing.JTextField txtUpdateItemID;
+    private javax.swing.JLabel txtUpdateItemID;
     private javax.swing.JTextField txtUpdateItemName;
     private javax.swing.JTextField txtUpdateItemPrice;
     private javax.swing.JTextField txtUpdateItemQunt;
