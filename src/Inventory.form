@@ -282,7 +282,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="btnAddItem" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="btnRemoveItem" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnClearDataFromUpdate" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="txtAddItemName" alignment="0" max="32767" attributes="0"/>
@@ -321,7 +321,7 @@
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnAddItem" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnRemoveItem" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnClearDataFromUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -435,12 +435,12 @@
                     <Property name="text" type="java.lang.String" value="ITEM"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnRemoveItem">
+                <Component class="javax.swing.JButton" name="btnClearDataFromUpdate">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="CLEAR"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveItemActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearDataFromUpdateActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -481,23 +481,25 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtUpdateItemPrice" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtUpdateItemID" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="txtUpdateItemPrice" alignment="0" pref="160" max="32767" attributes="0"/>
                                       <Component id="txtUpdateItemName" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtUpdateItemQunt" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="txtUpdateItemID" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="122" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnUpdateItem" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="btnClearData" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -524,8 +526,11 @@
                               <Component id="txtUpdateItemPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="55" max="32767" attributes="0"/>
-                          <Component id="btnUpdateItem" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace pref="63" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnClearData" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUpdateItem" alignment="3" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -576,6 +581,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="txtUpdateItemID">
+                </Component>
+                <Component class="javax.swing.JButton" name="btnClearData">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="CLEAR"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearDataActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -109,7 +109,7 @@ public class Inventory extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnRemoveItem = new javax.swing.JButton();
+        btnClearDataFromUpdate = new javax.swing.JButton();
         tabUpdate = new javax.swing.JPanel();
         txtUpdateItemName = new javax.swing.JTextField();
         txtUpdateItemQunt = new javax.swing.JTextField();
@@ -120,6 +120,7 @@ public class Inventory extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtUpdateItemID = new javax.swing.JLabel();
+        btnClearData = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
@@ -342,10 +343,10 @@ public class Inventory extends javax.swing.JFrame {
 
         jLabel1.setText("ITEM");
 
-        btnRemoveItem.setText("CLEAR");
-        btnRemoveItem.addActionListener(new java.awt.event.ActionListener() {
+        btnClearDataFromUpdate.setText("CLEAR");
+        btnClearDataFromUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveItemActionPerformed(evt);
+                btnClearDataFromUpdateActionPerformed(evt);
             }
         });
 
@@ -375,7 +376,7 @@ public class Inventory extends javax.swing.JFrame {
                             .addGroup(tabAddLayout.createSequentialGroup()
                                 .addComponent(btnAddItem)
                                 .addGap(31, 31, 31)
-                                .addComponent(btnRemoveItem)
+                                .addComponent(btnClearDataFromUpdate)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtAddItemName)
                             .addComponent(txtAddItemQuantity)
@@ -404,7 +405,7 @@ public class Inventory extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(tabAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddItem)
-                    .addComponent(btnRemoveItem))
+                    .addComponent(btnClearDataFromUpdate))
                 .addGap(54, 54, 54)
                 .addGroup(tabAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDeleteItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -452,6 +453,13 @@ public class Inventory extends javax.swing.JFrame {
 
         jLabel9.setText("Price");
 
+        btnClearData.setText("CLEAR");
+        btnClearData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tabUpdateLayout = new javax.swing.GroupLayout(tabUpdate);
         tabUpdate.setLayout(tabUpdateLayout);
         tabUpdateLayout.setHorizontalGroup(
@@ -466,18 +474,20 @@ public class Inventory extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabUpdateLayout.createSequentialGroup()
-                        .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUpdateItemPrice)
-                            .addComponent(txtUpdateItemName)
-                            .addComponent(txtUpdateItemQunt, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(12, 12, 12))
-                    .addGroup(tabUpdateLayout.createSequentialGroup()
                         .addComponent(txtUpdateItemID)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabUpdateLayout.createSequentialGroup()
+                        .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtUpdateItemPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(txtUpdateItemName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUpdateItemQunt))
+                        .addGap(12, 12, 12))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabUpdateLayout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnUpdateItem)
-                .addGap(118, 118, 118))
+                .addGap(36, 36, 36)
+                .addComponent(btnClearData)
+                .addGap(12, 12, 12))
         );
         tabUpdateLayout.setVerticalGroup(
             tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,8 +508,10 @@ public class Inventory extends javax.swing.JFrame {
                 .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUpdateItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(tabUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClearData)
+                    .addComponent(btnUpdateItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(42, 42, 42))
         );
 
@@ -653,75 +665,59 @@ public class Inventory extends javax.swing.JFrame {
         // Save Changes(Update)
 
         try{
-            if( txtUpdateItemID.getText().equals(""))
-            JOptionPane.showMessageDialog(null, "Enter item!", "Ooops Wait...!", JOptionPane.ERROR_MESSAGE);
 
-            else{
-                BufferedReader rdfile= new BufferedReader( new FileReader("items.txt"));
+                String sId = txtUpdateItemID.getText();
 
-                String[] itemline= new String[100];
-                String temp[];
-                String search= "", prod="", Qty="", Price="";
-                search= txtUpdateItemID.getText();
-                int qty=0, x=0; double price=0.0;
-                boolean found= false;
-
-                prod= txtUpdateItemName.getText();
-                Qty= txtUpdateItemQunt.getText();
-                Price= txtUpdateItemPrice.getText();
-                if( (!(prod.equals(""))) || (!(Qty.equals(""))) || (!(Price.equals(""))) ){
-                    while(( itemline[x]= rdfile.readLine()) != null){
-                        temp= itemline[x].split("\t");
-
-                        if( search.equals( temp[0])){
-                            if( prod.equals(""))
-                            prod= temp[0];
-                            if( Qty.equals(""))
-                            qty= Integer.parseInt(temp[1]);
-                            else
-                            qty= Integer.parseInt( Qty )+ Integer.parseInt(temp[1]);
-
-                            if( Price.equals(""))
-                            price= Double.parseDouble(temp[2]);
-                            else
-                            price= Double.parseDouble( Price);
-
-                            itemline[x]= prod+"\t"+qty+"\t"+price;
-                            found= true;
-                        }
-                        x++;
-
-                    }
-                    rdfile.close();
-
-                    if( found ){
-                        PrintWriter wrfile= new PrintWriter( new FileWriter("items.txt"));
-
-                        for( int j=0; itemline[j] != null; j++)
-                        wrfile.println( itemline[j]);
-
-                        wrfile.close();
-
-                        JOptionPane.showMessageDialog(null, "Changes Saved!");
-                    } else
-                    JOptionPane.showMessageDialog(null, "Item Not Found!");
-
+                String sName= txtUpdateItemName.getText();
+                String sQty= txtUpdateItemQunt.getText();
+                String sPrice= txtUpdateItemPrice.getText();
+                
+                int id = Integer.parseInt(sId);
+                int Qty= Integer.parseInt(sQty);
+                double Price= Double.parseDouble(sPrice);
+                
+            try {
+                pst = con.prepareStatement("Update ItemsTable set Name=?,Quantity=?,Price=? where Item_No = ?");
+                pst.setString(1, sName);
+                pst.setInt(2, Qty);
+                pst.setDouble(3, Price);
+                pst.setInt(4, id);
+                
+                int k = pst.executeUpdate();
+                
+                if(k==1){
+                    
                     txtUpdateItemID.setText("");
                     txtUpdateItemName.setText("");
                     txtUpdateItemQunt.setText("");
                     txtUpdateItemPrice.setText("");
-
-                } else
+                    
+                    tableReaload();
+                    JOptionPane.showMessageDialog(null, "Changes Saved!");
+                    
+                }else{
+                    
+                txtUpdateItemID.setText("");
+                txtUpdateItemName.setText("");
+                txtUpdateItemQunt.setText("");
+                txtUpdateItemPrice.setText("");
+                
                 JOptionPane.showMessageDialog( null, "No Changes Yet!");
+                    
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }catch(IOException e){} catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Some input may be invalid!");
-
+            
+        } catch(NumberFormatException e){
+            
             txtUpdateItemID.setText("");
             txtUpdateItemName.setText("");
             txtUpdateItemQunt.setText("");
             txtUpdateItemPrice.setText("");
+            
+            JOptionPane.showMessageDialog(null, "Some input may be invalid!");
         }
     }//GEN-LAST:event_btnUpdateItemActionPerformed
 
@@ -739,10 +735,10 @@ public class Inventory extends javax.swing.JFrame {
                
                 String name =txtAddItemName.getText();
                 String sQunt=txtAddItemQuantity.getText();
-                String sPrice=txtAddItemQuantity.getText();
+                String sPrice=txtAddItemPrice.getText();
                 
                 int Iqunt = Integer.parseInt(sQunt);
-                double IPrice = Double.parseDouble(sQunt);
+                double IPrice = Double.parseDouble(sPrice);
                 
                 
                 try {
@@ -817,16 +813,19 @@ public class Inventory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveItemActionPerformed
+    private void btnClearDataFromUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDataFromUpdateActionPerformed
          //Clear Button(Add/Delete)
 
         txtAddItemName.setText("");
         txtAddItemQuantity.setText("");
         txtAddItemPrice.setText("");// TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoveItemActionPerformed
+    }//GEN-LAST:event_btnClearDataFromUpdateActionPerformed
 
     private void ItemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemTableMouseClicked
         // TODO add your handling code here:
+        
+        //if(tabAdd.(active))
+        
         
         DefaultTableModel d1 =(DefaultTableModel )ItemTable.getModel();
         int selectIndex =ItemTable.getSelectedRow();
@@ -851,6 +850,15 @@ public class Inventory extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_ItemTableMouseClicked
+
+    private void btnClearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDataActionPerformed
+        // TODO add your handling code here:
+        
+        txtUpdateItemID.setText("");
+        txtUpdateItemName.setText("");
+        txtUpdateItemQunt.setText("");
+        txtUpdateItemPrice.setText("");
+    }//GEN-LAST:event_btnClearDataActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -889,8 +897,9 @@ public class Inventory extends javax.swing.JFrame {
     private javax.swing.JTable ItemTable;
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JButton btnAddItem;
+    private javax.swing.JButton btnClearData;
+    private javax.swing.JButton btnClearDataFromUpdate;
     private javax.swing.JButton btnDeleteItem;
-    private javax.swing.JButton btnRemoveItem;
     private javax.swing.JButton btnUpdateItem;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
