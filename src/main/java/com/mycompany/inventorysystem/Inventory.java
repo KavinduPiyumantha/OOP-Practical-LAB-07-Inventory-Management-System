@@ -34,14 +34,14 @@ public class Inventory extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        btnDeleteItem = new javax.swing.JButton();
         jTextField14 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnAddItem = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnRemoveItem = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
@@ -232,11 +232,11 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton6.setText("Delete");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDeleteItem.setText("Delete");
+        btnDeleteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnDeleteItemActionPerformed(evt);
             }
         });
 
@@ -247,10 +247,10 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddItem.setText("ADD");
+        btnAddItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddItemActionPerformed(evt);
             }
         });
 
@@ -262,10 +262,10 @@ public class Inventory extends javax.swing.JFrame {
 
         jLabel1.setText("ITEM");
 
-        jButton2.setText("CLEAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoveItem.setText("CLEAR");
+        btnRemoveItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRemoveItemActionPerformed(evt);
             }
         });
 
@@ -293,9 +293,9 @@ public class Inventory extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnAddItem)
                                 .addGap(31, 31, 31)
-                                .addComponent(jButton2)
+                                .addComponent(btnRemoveItem)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jTextField3)
                             .addComponent(jTextField4)
@@ -303,7 +303,7 @@ public class Inventory extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addComponent(jButton6)
+                .addComponent(btnDeleteItem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -323,14 +323,14 @@ public class Inventory extends javax.swing.JFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnAddItem)
+                    .addComponent(btnRemoveItem))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(btnDeleteItem)
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
@@ -476,6 +476,7 @@ public class Inventory extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -490,7 +491,7 @@ public class Inventory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteItemActionPerformed
         //Delete Button
 
         try {
@@ -533,7 +534,7 @@ public class Inventory extends javax.swing.JFrame {
 
             }
         } catch (IOException e) {}
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnDeleteItemActionPerformed
 
     private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
        
@@ -631,7 +632,7 @@ public class Inventory extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
         // Add Button
 
         try {
@@ -698,7 +699,7 @@ public class Inventory extends javax.swing.JFrame {
             jTextField4.setText("");
             jTextField5.setText("");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddItemActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Display Button
@@ -732,13 +733,13 @@ public class Inventory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveItemActionPerformed
          //Clear Button(Add/Delete)
 
         jTextField3.setText("");
         jTextField4.setText("");
         jTextField5.setText("");// TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRemoveItemActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -773,10 +774,10 @@ public class Inventory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAddItem;
+    private javax.swing.JButton btnDeleteItem;
+    private javax.swing.JButton btnRemoveItem;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
