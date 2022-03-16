@@ -164,42 +164,52 @@ public class Search extends javax.swing.JFrame {
         //Search Button
         
             String typeGets = selectType.getSelectedItem().toString();
-            
-
-            int text = 0;
-            
+  
             String type;
-
-            if(typeGets == "ID"){
-                type = "Item_NO";
-                String textGets = txtItemSearch.getText();
-                text= Integer.parseInt(textGets);
-            }
-            else if(typeGets == "Name"){
-                type = "Name";
-                //text= textGets;
-            }
-            else if(typeGets == "Quantity"){
-                type = "Quantity";
-            }
-            else{
-                type = "Price";
-            }
-
             
-            
-            int c;
-        
-       
             if( txtItemSearch.getText().equals(""))
-            JOptionPane.showMessageDialog(null, "Enter item!", "Oops Wait...!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Enter item!", "Oops Wait...!", JOptionPane.ERROR_MESSAGE);
             else{
                 
                 try {
-                    pst =con.prepareStatement("Select * from ItemsTable where ? = ?");
-                    pst.setString(1, type);
-                    pst.setInt(2, text);
-                    
+
+                    if(typeGets == "ID"){
+                        int text = 0;
+                        type = "Item_NO";
+                        String textGets = txtItemSearch.getText();
+                        text= Integer.parseInt(textGets);
+                        
+                        pst =con.prepareStatement("Select * from ItemsTable where "+ type +" = "+ text);
+                    }
+                    else if(typeGets == "Name"){
+                        
+                        type = "Name";
+                        String textGets = txtItemSearch.getText();
+                        pst =con.prepareStatement("Select * from ItemsTable where "+ type +" like ?");
+                        pst.setString(1,textGets);
+                       
+                    }
+                    else if(typeGets == "Quantity"){
+                        int text = 0;
+                        type = "Quantity";
+                        String textGets = txtItemSearch.getText();
+                        text= Integer.parseInt(textGets);
+                        
+                        pst =con.prepareStatement("Select * from ItemsTable where "+ type +" = "+ text);
+                    }
+                    else{
+                        double text = 0;
+                        type = "Price";
+                        
+                        String textGets = txtItemSearch.getText();
+                        text= Double.parseDouble(textGets);
+                        
+                        pst =con.prepareStatement("Select * from ItemsTable where "+ type +" = "+ text);
+                    }
+
+            
+                    int c;
+
                     rs= pst.executeQuery();
                     
                     System.out.println(rs);

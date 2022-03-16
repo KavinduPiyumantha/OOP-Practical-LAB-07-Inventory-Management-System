@@ -20,7 +20,7 @@ ALTER TABLE ItemsTable AUTO_INCREMENT = 1;
 
 
 
-
-
+select * from ItemsTable where Item_No=2;
+select * from ItemsTable where Name like "ewrfew%";
 
 drop table itemstable;
