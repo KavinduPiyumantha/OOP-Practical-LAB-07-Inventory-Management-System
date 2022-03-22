@@ -121,7 +121,6 @@ public class Inventory extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtUpdateItemID = new javax.swing.JLabel();
         btnClearData = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -517,27 +516,14 @@ public class Inventory extends javax.swing.JFrame {
 
         Tabs.addTab("Update", tabUpdate);
 
-        jButton3.setText("DISPLAY");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout mainJPanelLayout = new javax.swing.GroupLayout(mainJPanel);
         mainJPanel.setLayout(mainJPanelLayout);
         mainJPanelLayout.setHorizontalGroup(
             mainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainJPanelLayout.createSequentialGroup()
-                .addGroup(mainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainJPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))
-                    .addGroup(mainJPanelLayout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(scrollTable, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -545,12 +531,9 @@ public class Inventory extends javax.swing.JFrame {
             mainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainJPanelLayout.createSequentialGroup()
-                        .addComponent(scrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                .addGroup(mainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Tabs)
+                    .addComponent(scrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -637,7 +620,7 @@ public class Inventory extends javax.swing.JFrame {
                 
                 //JOptionPane.showMessageDialog(null, "Item is already not in the list!", "Ooops!", JOptionPane.ERROR_MESSAGE);
                 
-                JOptionPane.showMessageDialog(null, "Succesfully Deleted!", "Ok!  :-)", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Succesfully Deleted!", "Ok!  :-)", JOptionPane.INFORMATION_MESSAGE);
 
                 txtDeleteItem.setText("");
 
@@ -781,44 +764,14 @@ public class Inventory extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddItemActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // Display Button
-        
-        try {
-                for (int r = 0; r < 100; r++) { //initializing row
-                    for (int c = 0; c < 4; c++) { //initializing column
-                        ItemTable.setValueAt(null, r, c);
-                    }
-                }
-
-                BufferedReader rdfile = new BufferedReader(new FileReader("items.txt"));
-
-                String[] item = new String[100];
-                String[] temp;
-
-                int x = 0;  //read item
-                while ((item[x] = rdfile.readLine()) != null) {
-                    temp = item[x].split("\t");
-                    ItemTable.setValueAt(( x + 1), x, 0);
-                    for (int j = 1; j < 4; j++) {
-                        ItemTable.setValueAt(temp[j - 1], x, j);
-                    }
-
-                    x++;
-                }
-                rdfile.close();
-
-            } catch (IOException e) {
-            }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void btnClearDataFromUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDataFromUpdateActionPerformed
          //Clear Button(Add/Delete)
 
         txtAddItemName.setText("");
         txtAddItemQuantity.setText("");
-        txtAddItemPrice.setText("");// TODO add your handling code here:
+        txtAddItemPrice.setText("");
+        txtDeleteItem.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnClearDataFromUpdateActionPerformed
 
     private void ItemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemTableMouseClicked
@@ -901,7 +854,6 @@ public class Inventory extends javax.swing.JFrame {
     private javax.swing.JButton btnClearDataFromUpdate;
     private javax.swing.JButton btnDeleteItem;
     private javax.swing.JButton btnUpdateItem;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

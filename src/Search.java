@@ -185,8 +185,9 @@ public class Search extends javax.swing.JFrame {
                         
                         type = "Name";
                         String textGets = txtItemSearch.getText();
+                        String finalGets = textGets+"%";
                         pst =con.prepareStatement("Select * from ItemsTable where "+ type +" like ?");
-                        pst.setString(1,textGets);
+                        pst.setString(1,finalGets);
                        
                     }
                     else if(typeGets == "Quantity"){
@@ -217,8 +218,8 @@ public class Search extends javax.swing.JFrame {
                     rsd = rs.getMetaData();
                     c =rsd.getColumnCount();
                     
-                    System.out.println(rsd);
-                    System.out.println(c);
+//                    System.out.println(rsd);
+//                    System.out.println(c);
                     
                     DefaultTableModel d =(DefaultTableModel) searchTable.getModel();
                     d.setRowCount(0);
@@ -229,24 +230,21 @@ public class Search extends javax.swing.JFrame {
                         //System.out.println(v);//
                         for(int i=1;i<=c;i++){
                             v1.add(rs.getInt("Item_No"));
-                                System.out.println(rs.getInt("Item_No"));
+                                //System.out.println(rs.getInt("Item_No"));
                             v1.add(rs.getString("Name"));
-                                System.out.println(rs.getString("Name"));
+                               // System.out.println(rs.getString("Name"));
                             v1.add(rs.getInt("Quantity"));
-                                System.out.println(rs.getInt("Quantity"));
+                               // System.out.println(rs.getInt("Quantity"));
                             v1.add(rs.getDouble("Price"));
-                                System.out.println(rs.getDouble("Price"));
+                                //System.out.println(rs.getDouble("Price"));
                         }
                        
                         Enumeration enumeration = v1.elements();
         //6
-                        while(enumeration.hasMoreElements()){
-                            System.out.println(enumeration.nextElement());
-                        }
-                       
-                        
-                        
-                        
+                       // while(enumeration.hasMoreElements()){
+                           // System.out.println(enumeration.nextElement());
+                        //}
+
                         
                         System.out.print(v1);//
                         d.addRow(v1);
@@ -255,10 +253,7 @@ public class Search extends javax.swing.JFrame {
 
                         
                     txtItemSearch.setText("");
-                        
-                    
-                    
-                    
+
                     //JOptionPane.showMessageDialog(null, "Item(s) not found!", "Ooops!", JOptionPane.ERROR_MESSAGE);
                     
                    
