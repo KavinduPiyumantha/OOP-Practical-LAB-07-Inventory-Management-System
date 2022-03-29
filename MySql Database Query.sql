@@ -10,6 +10,8 @@ primary key(Item_No)
 
 
 
+
+
 -- drop table ItemsTable;
 
 -- Insert into ItemsTable(Name,Quantity,Price) 

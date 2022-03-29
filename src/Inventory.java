@@ -593,6 +593,13 @@ public class Inventory extends javax.swing.JFrame {
                     if(k==1){
                         
                         txtDeleteItem.setText("");
+                        
+                        txtUpdateItemID.setText("");
+                        txtUpdateItemName.setText("");
+                        txtUpdateItemQunt.setText("");
+                        txtUpdateItemPrice.setText("");
+                        
+                        
                         tableReaload();
                         JOptionPane.showMessageDialog(null, "Succesfully Deleted!", "Ok!  :-)", JOptionPane.INFORMATION_MESSAGE);
                     }
